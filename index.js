@@ -21,6 +21,6 @@ app.use('/api/admin',srouter);
 app.use('/api/auth',aurouter);
 app.use('/api/comment',crouter);
 app.use('/api/sidhu',hrouter);
-// const PORT=process.env.PORT || 5000;
-// app.listen(PORT,()=>{console.log('app is listening to port')});
+const PORT=process.env.PORT || 5000;
+app.listen(PORT,()=>{console.log('app is listening to port')});
 module.exports=app;
