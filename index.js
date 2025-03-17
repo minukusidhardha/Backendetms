@@ -12,7 +12,7 @@ const hrouter = require('./Routers/hemanthrouter');
 const app=express();
 app.use(cors())
 app.use(express.json());
-// dbconnect();
+dbconnect();
 app.use('/api/employee',router);
 app.use('/api/project',prouter);
 app.use('/api/task',trouter);
