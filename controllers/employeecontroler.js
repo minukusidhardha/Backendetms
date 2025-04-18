@@ -115,7 +115,7 @@ exports.Delete=async(req,res)=>{
     try{
         console.log('inside')
         let obj=req.user;
-        let eid=req.params.eid;
+        let eid=req.params.id;
         console.log(eid)
         let username=obj.username;
         let admin=await Admins.findOne({'username':username})
