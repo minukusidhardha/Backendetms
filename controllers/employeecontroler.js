@@ -57,7 +57,6 @@ exports.login=async(req,res)=>{
 }
 exports.Uploadcv=async(req,res)=>{
     try{
-        console.log('hello')
     let id=req.user;
         let username = id.username;
         let employee = await Employee.findOne({ 'username': username })
@@ -66,13 +65,13 @@ exports.Uploadcv=async(req,res)=>{
         if (!req.file)
             return res.status(400).json({ 'msg': 'file not found!!' })
         const file = req.file.filename;
-        let mimetype = req.file.mimetype;
-        const allowedextensions = ['docx', 'pdf']
-        if (!allowedextensions.includes(mimetype.split('/')[1])) {
-            return res.status(400).json({ 'msg': 'file not allowed!!allowed types: ' + allowedextensions })
-        }
-        employee.cv = file + '.' + mimetype.split('/')[1]
-
+        // let mimetype = req.file.mimetype;
+        // const allowedextensions = ['docx', 'pdf']
+        // if (!allowedextensions.includes(mimetype.split('/')[1])) {
+        //     return res.status(400).json({ 'msg': 'file not allowed!!allowed types: ' + allowedextensions })
+        // }
+        employee.cv = file //+ '.' + mimetype.split('/')[1]
+        console.log(file)
         const employeesaved = await employee.save(employee)
         res.json(employeesaved)
     }
@@ -85,7 +84,7 @@ exports.Uploadcv=async(req,res)=>{
 }
 exports.Profilepic = async (req, res) => {
     try {
-        console.log('hello')
+        console.log('supraj')
         let id = req.user;
         let username = id.username;
         let employee = await Employee.findOne({ 'username': username })
@@ -97,13 +96,13 @@ exports.Profilepic = async (req, res) => {
         }
 
         let multername = req.file.filename;
-        let mimetype = req.file.mimetype.split('/')[1];
-        let allowedextensions = ['jpeg', 'gif', 'png', 'pdf']
-        if (!allowedextensions.includes(mimetype)) {
-            return res.status(400).json({ 'msg': 'file not allowed!!allowed types: ' + allowedextensions })
-        }
+        // let mimetype = req.file.mimetype.split('/')[1];
+        // let allowedextensions = ['jpeg', 'gif', 'png', 'pdf']
+        // if (!allowedextensions.includes(mimetype)) {
+        //     return res.status(400).json({ 'msg': 'file not allowed!!allowed types: ' + allowedextensions })
+        // }
 
-        employee.profilePic = multername + '.' + mimetype;
+        employee.profilePic = multername  // + '.' + mimetype;
         employee = await employee.save(employee)
         res.json(employee)
     }
@@ -114,8 +113,10 @@ exports.Profilepic = async (req, res) => {
 }
 exports.Delete=async(req,res)=>{
     try{
+        console.log('inside')
         let obj=req.user;
-        let eid=req.params;
+        let eid=req.params.eid;
+        console.log(eid)
         let username=obj.username;
         let admin=await Admins.findOne({'username':username})
         if(!admin){
